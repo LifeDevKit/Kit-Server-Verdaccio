@@ -2,20 +2,19 @@
 
 # Install
  - 종속성을 위해 서버설정 및 클라이언트측 로그인이 되어있어야한다.
- - [Verdaccio](https://shlifedev.tistory.com/69) 서버가 열려 있어야한다.
+ - [Verdaccio](https://shlifedev.tistory.com/69) 서버가 열려 있어야한다. 
 
 ## CDN Install
  - 이 부분 계획해야함. 현재 서버 로컬에 패키지가 올라가는 구조인데 이걸 반드시 cdn을 지정해주어야함
 
- 
 
 ## 개인 패키지 서버에 로그인
 ```
    > openupm login -r http://package.shlife.dev:4873 -u id -p password -e email --always-auth=true
+   > npm 으로도 똑같이 로그인 해준다.
 ```
 
 ## 개인 패키지 서버에서 검색하기
- 아쉽지만 이는 npm을 사용해야한다.
 ```
    > npm -r http://package.shlife.dev:4873 search 검색어
 ```
