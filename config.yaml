@@ -1,32 +1,27 @@
 storage: ./storage
 plugins: ./plugins
+middlewares:
+  audit:
+    enabled: true
 web:
   title: shlifedev's packages
-
+  
 # https://verdaccio.org/docs/configuration#authentication
-
 max_body_size: 100mb  
 auth:
   htpasswd:
     file: ./htpasswd
     # 설정시 회원가입 가능, 현재는 어드민이 있으므로 비활성화
     max_users: -1
-
 # https://verdaccio.org/docs/configuration#uplinks
-# a list of other known repositories we can talk to
 # 내 서버에 파일이 없는경우 여기에서 다운로드
-# 참고로 dependencies들도 여기에서 받아옴 (없으면)
 uplinks:
   openupm:
-          url: https://package.openupm.com
-          cache : false
+    url: https://package.openupm.com
+    cache : false
   unity:
-          url: https://packages.unity.com/
-          cache : false
-  
-# 아래 URL에서 프로텍트 방법 확인
-# https://verdaccio.org/docs/protect-your-dependencies/
-# https://verdaccio.org/docs/configuration#packages
+    url: https://packages.unity.com/
+    cache : false
 packages:
    # 스코핑 패키지 어세스 권한
   '@*/*': 
@@ -35,7 +30,7 @@ packages:
     unpublish: shlifedev
     proxy: openupm unity
 
-  'shlifedev-*'
+  'shlifedev-*':
     access: shlifedev
     publish : shlifedev
     unpublish : shlifedev
@@ -56,60 +51,16 @@ server:
   # See: https://expressjs.com/en/guide/behind-proxies.html
   # trustProxy: '127.0.0.1'
   
-  
-
-# https://verdaccio.org/docs/configuration#security
-# security:
-#   api:
-#     legacy: true
-#     jwt:
-#       sign:
-#         expiresIn: 29d
-#       verify:
-#         someProp: [value]
-#    web:
-#      sign:
-#        expiresIn: 1h # 1 hour by default
-#      verify:
-#         someProp: [value]
-
 
 # https://verdaccio.org/docs/configuration#listen-port
 listen:  
-          - 0.0.0.0:4873    
+  - 0.0.0.0:4873    
             #https:
             #key: /home/shlifedev/.config/verdaccio/verdaccio-key.pem
             #cert: /home/shlifedev/.config/verdaccio/verdaccio-cert.pem     
             
             
-# https://verdaccio.org/docs/configuration#https
 # https:
 #   key: ./path/verdaccio-key.pem
 #   cert: ./path/verdaccio-cert.pem
 #   ca: ./path/verdaccio-csr.pem
-
-
-middlewares:
-  audit:
-    enabled: true
-
-# https://verdaccio.org/docs/logger
-# log settings
-log: { type: stdout, format: pretty, level: http }
-#experiments:
-#  # support for npm token command
-#  token: false
-#  # disable writing body size to logs, read more on ticket 1912
-#  bytesin_off: false
-#  # enable tarball URL redirect for hosting tarball with a different server, the tarball_url_redirect can be a template string
-#  tarball_url_redirect: 'https://mycdn.com/verdaccio/${packageName}/${filename}'
-#  # the tarball_url_redirect can be a function, takes packageName and filename and returns the url, when working with a js configuration file
-#  tarball_url_redirect(packageName, filename) {
-#    const signedUrl = // generate a signed url
-#    return signedUrl;
-#  }
-
-# translate your registry, api i18n not available yet
-# i18n:
-# list of the available translations https://github.com/verdaccio/verdaccio/blob/master/packages/plugins/ui-theme/src/i18n/ABOUT_TRANSLATIONS.md
-#   web: en-US
