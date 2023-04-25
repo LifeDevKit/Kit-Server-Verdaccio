@@ -20,31 +20,21 @@ uplinks:
     url: https://package.openupm.com
     cache : false
   unity:
-    url: https://packages.unity.com/
+    url: https://packages.unity.com
     cache : false
-packages:
-   # 스코핑 패키지 어세스 권한
-  '@*/*': 
-    access: shlifedev
-    publish: shlifedev
-    unpublish: shlifedev
-    proxy: openupm unity
-
-  'shlifedev-*':
-    access: shlifedev
-    publish : shlifedev
-    unpublish : shlifedev
-    proxy: openupm unity
- 
-    # 스코프가 없는 패키지들
+    
+packages: 
   '**': 
-    access: shliffedev 
+    access: shlifedev
     publish: shlifedev
-    unpublish: shlifedev
-
-    # 패키지가 없는경우 요청할 경로들
-    proxy: openupm unity
-
+    unpublish: shlifedev  
+ 
+  '@shlifedev/*':
+    access: shlifedev
+    publish: shlifedev
+    unpublish: shlifedev 
+   
+   
 server:
   keepAliveTimeout: 60
   # Allow `req.ip` to resolve properly when Verdaccio is behind a proxy or load-balancer
